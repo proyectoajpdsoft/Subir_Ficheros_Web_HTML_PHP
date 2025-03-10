@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo formulario subida fichero con límite de tamaño - ProyectoA</title>
+	
+    <style>
+        .subir-fichero {
+            display: none;
+        }
+
+        .boton {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .boton:hover {
+            background-color: #45a049;
+        }
+		
+		div {
+		  margin:20px;
+		  margin-left: 20px;
+		  margin-right: 20px;
+		  padding: 20px;
+		  border: 1px solid black;
+		}
+    </style>	
+</head>
+<body>
+	<div>
+		<form action="subir.php" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="MAX_FILE_SIZE" value="2097152">
+			<label for="fichero" class="boton">Elegir fichero</label>
+			<input type="file" id="fichero" name="fichero" class="subir-fichero">
+			<p id="fichero_elegido"> No ha elegido un fichero. Pulse en "Elegir fichero"</p>
+			<button type="submit" name="subir_fichero" id="subir_fichero" disabled>Subir</button>
+		</form>
+	</div>
+	
+	<script>
+        document.getElementById('fichero').addEventListener('change', function () 
+		{
+			// Mostrar el nombre del fichero elegido
+            let nombreFichero = this.files[0] ? this.files[0].name : 'No ha elegido un fichero. Pulse en "Elegir fichero"';
+            document.getElementById('fichero_elegido').textContent = 'Fichero elegido: ' + nombreFichero;
+			// Habilitar botón subir si se ha elegido un fichero
+			const botonSubir = document.getElementById('subir_fichero');
+			botonSubir.disabled = this.files[0] ? false:true;
+        });
+    </script>	
+</body>
+</html>
